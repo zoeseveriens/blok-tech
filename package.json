@@ -1,0 +1,23 @@
+{
+  "name": "dating-app",
+  "version": "1.0.0",
+  "description": "dating app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoeseveriens/dating-app.git"
+  },
+  "keywords": [
+    "dating",
+    "app"
+  ],
+  "author": "Zoe Severiens zoe.222@hotmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zoeseveriens/dating-app/issues"
+  },
+  "homepage": "https://github.com/zoeseveriens/dating-app#readme"
+}
