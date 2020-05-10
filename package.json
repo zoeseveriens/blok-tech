@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/zoeseveriens/dating-app/issues"
   },
-  "homepage": "https://github.com/zoeseveriens/dating-app#readme"
+  "homepage": "https://github.com/zoeseveriens/dating-app#readme",
+  "dependencies": {
+    "camelcase": "^6.0.0"
+  }
 }
