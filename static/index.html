@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>memes</title>
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost&family=Roboto:wght@300&family=Ubuntu&display=swap" rel="stylesheet">
 </head>
+
 <body>
-
-    <h1>For you</h1>
-
-    <section>
-        <article class="profile">
-          <div class="container">
-             <img class="profile_pic" src="img/profile_pic.jpg" alt="profiel foto">
-          </div>
-          <div class="text">
-             <h1>Shane, 24</h1>
-             <h1>Amsterdam</h1>
-             <p>Love to travel</p>
-             <button id="arrow_down"><p><i class="arrow down"></i></p></button>
-        </div>
-        <div class="text more_info">
-            <h2>Bio</h1>
-            <p>...Something about myself...</p>
-            <h2>Interests</h1>
-            <p>Traveling, being outside</p>
-       </div>
-        </article>
-    </section>
-
-    <script src="script.js"></script>
+    <header>
+        <nav class="nav-main">
+          <ul>
+            <div class="btn-toggle-nav" onclick="toggleNav()"></div>
+            <li><a href="#">Memes</a></li>
+            <li><img src="../test-dating-app/img/message-icon.png" alt="message icon"></li>
+          </ul>
+        </nav>
+      </header> 
+    
+      <aside class="nav-sidebar">
+        <ul> 
+          <li><a href="./index.html">For you</a></li>
+          <li><a href="#">Memes</a></li>
+          <li><a href="#">Account</a></li>
+          <li><a href="#">Log out</a></li>
+        </ul>
+      </aside>
+    
 </body>
 </html>
