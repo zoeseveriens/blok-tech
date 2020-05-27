@@ -51,7 +51,7 @@ express()
           description: req.body.description
         })
       
-        res.redirect('/' + id)
+        res.redirect('/likes')
         
       }
 
