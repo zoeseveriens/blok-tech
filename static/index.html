@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost&family=Roboto:wght@300&family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
@@ -15,7 +15,7 @@
       <ul>
         <div class="btn-toggle-nav" onclick="toggleNav()"></div>
         <li><a href="#">For you</a></li>
-        <li><img src="../static/img/message-icon.png" alt="message icon"></li>
+        <li><img src="img/message-icon.png" alt="message icon"></li>
       </ul>
     </nav>
   </header> 
@@ -38,12 +38,20 @@
              <h1>Amsterdam</h1>
              <p>Love to travel</p>
              <button class="btn-toggle"><p><i class="arrow down"></i></p></button>
+            </div>
 
-            </div>
-            <div class="buttons">
-              <img src="../static/img/dislike-button.png" alt="dislike button">
-              <img src="../static/img/like-button.png" alt="like button">
-            </div>
+           <!-- <div class="buttons">
+              <img src="img/dislike-button.png" alt="dislike button">
+              <img src="img/like-button.png" alt="like button">
+            </div> -->
+
+           <form method="POST" action="/likes">
+              <div class="buttons">
+               <input type="image" src="img/dislike-button.png">
+               <input type="image" src="img/like-button.png">
+              </div>
+          </form>
+
         </article>
     </section>
 
