@@ -1,43 +1,29 @@
 <%- include('partials/header'); -%>
+
 <body>
-
-<section>
-    <article class="profile-container">
-      <div class="profile-img-container"></div>
-      <div class="profile-info">
-         <h1>Shane, 24</h1>
-         <h1>Amsterdam</h1>
-         <p>Love to travel</p>
-         <button class="btn-toggle"><p><i class="arrow down"></i></p></button>
-        </div>
-
-       <!-- <div class="buttons">
-          <img src="img/dislike-button.png" alt="dislike button">
-          <img src="img/like-button.png" alt="like button">
-        </div> -->
-
-        <form method="POST" action="/likes">
-            <div class="buttons">
-             <input type="image" src="img/dislike-button.png" name="dislike">
-             <input type="image" src="img/like-button.png"  name="like">
+  
+      
+      <section>
+           <article class="profile-container">
+             <div class="profile-img-container">
+             <div class="profile-info">
+               <h1>Shane, 24</h1>
+               <h1>Amsterdam</h1>
+               <p>Model</p>
+               <button class="btn-toggle"><p><i class="arrow down"></i></p></button>
+             </div>
             </div>
-            <label>
-                test of het form werkt
-                <input type="text" name="name">
-            </label>
-            <label>
-                test
-              <input type="text" name="age">
-          </label>
-          <label>
-              test
-              <input type="text" name="description">
-          </label>
-          <button>like</button>
-        </form>
-<h1>hey</h1>
-    </article>
-
-</section>
-</body>
+          </article>
+  
+          <div class="buttons">
+            <img src="img/dislike-button.png" alt="dislike button">
+            <img src="img/like-button.png" alt="like button">
+          </div>
+  
+      </section>
+  
+  <script src="script.js"></script>
+  
+  </body>
+  </html>
 </html>

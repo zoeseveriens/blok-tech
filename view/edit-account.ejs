@@ -1,0 +1,41 @@
+<%- include('partials/account-header'); -%>
+<body>
+
+      <section class="account-page">
+          <div class="account-img-container">
+          </div>
+
+          <div class="account-profile-info">
+             <h1>Ammika Harris, 23</h1>
+             <h1>Amsterdam</h1>
+             <p>Influencer</p>
+         </div> 
+         
+
+          <h2>About me</h2>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+
+          <div class="account-interests">
+              <h2>Interests</h2>
+                <ul>
+                 <li>Shopping</li>
+                 <li>Cooking</li>
+                 <li>Reading</li>
+                </ul>
+         </div>
+         <form method="POST" action="/account">
+            <label>
+                What are some of your interests?
+                 <input type="text" name="point"> 
+            </label>
+           <button>add</button>
+        </form>
+        <button><a href="/account">Cancel</a></button>
+         
+
+      </section>
+
+      <script src="script.js"></script>
+    
+</body>
+</html>
