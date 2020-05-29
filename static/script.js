@@ -27,8 +27,9 @@ let toggleNav = function(){ //creates an anonymous function
 
     else if (toggleNavStatus === true){ //checks if the navigation is open
         getSidebarUl.style.visibility = 'hidden'; //changes the css code visibility from hidden to visible
-        getSidebar.style.width = '0px'; //changes the css code width to 150 px
-        getSidebarTitle.style.opacity = '0'; //changes the css code opacity to 0.5
+        getSidebar.style.width = '0px'; //changes the css code width to 0 
+        getSidebar.style.padding = '0px'; //changes the css code padding to 0
+        getSidebarTitle.style.opacity = '0'; //changes the css code opacity to 0
   
         let arrayLength = getSidebarLinks.length;
         for (let i = 0; i < arrayLength; i++){

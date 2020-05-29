@@ -1,13 +1,14 @@
 /*
 used fonts
-font-family: 'Jost', sans-serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Ubuntu', sans-serif;
+font-family: 'Montserrat', sans-serif; Kopjes
+font-family: 'Raleway', sans-serif; Lopende tekst
+font-family: 'Ubuntu', sans-serif; Titels
 */
 
 body{
     margin: 0;
-    background-color: #F1F1F1;
+    /* background-color:#F2EBD9; */
+    background-color: whitesmoke;
 }
 
 /* styling main navigation bar*/
@@ -15,7 +16,7 @@ body{
 .nav-main{
     width: 100%;
     height: 60px;
-    background-color:#FFF;
+    background-color: none;
     z-index: 1000;
     /*position: fixed;*/
 }
@@ -25,19 +26,15 @@ header ul{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 5px 0 5px;
+    margin: 0 15px 0 5px;
     padding: 0;
 }
 
 .nav-main ul li{
     list-style: none;
-}
-
-.nav-main ul li a{
+    font-family: 'Ubuntu', sans-serif;
     text-transform: uppercase;
-    text-decoration: none;
     font-size: 24px;
- 
 }
 
 header img{
@@ -47,7 +44,7 @@ header img{
 .btn-toggle-nav{
     width: 60px;
     height: 60px;
-    background-color: thistle;
+    background-color: none;
     background-image: url(img/hamburger.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -64,7 +61,6 @@ header img{
     left: 0;
     bottom: 0;
     width: 0px;
-    padding: 0 5px;
     height: calc(100vh - 60px);
     background-color: thistle;
     z-index: 1000;
@@ -95,7 +91,7 @@ header img{
     padding: 0 10px;
     text-decoration: none;
     text-transform: uppercase;
-    font-family: 'Jost', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     white-space: nowrap;
     opacity: 0;
     transition: all 0.3s ease-in-out;
@@ -107,17 +103,17 @@ header img{
 
 /* end styling side navigation bar*/
 
-.profile-container{
-    height: 35em;
-    width: 20em;
-    border-radius: 3%;
-    margin-top: 2em;
+section{
+    width: 22em;
     margin-left: auto;
-    padding-top: 16px;
-    padding-bottom: 10px;
     margin-right: auto;
-    background-color: white;
-    box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.55);
+    margin-top: 40px;
+}
+.profile-container{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 21em;
 }
 
 .profile-img-container{
@@ -126,20 +122,52 @@ header img{
     background-position: center;
     margin-left:auto;
     margin-right: auto;
-    width: 18em;
-    height: 25em;
+    width: 21em;
+    height: 31em;
+    border-radius: 5%;
 }
 
-.profile-info{
+.profile-info {
+    position: absolute;
+    bottom: 20px;
+    right: 13px; 
+    background-color:white;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 17em;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-left: 18px;
+    align-items: baseline;
+  }
+
+  .profile-info h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+  }
+
+  .profile-info p{
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    text-transform: uppercase;
+    color: grey;
+    font-size: 16px;
+  }
+
+  .profile-info :nth-child(2){
+    text-align: right;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
 }
 
-.profile-info :nth-child(2){
-    text-align: right;
-    margin-right: 18px;
+.profile-info :nth-child(3){
+    margin-top: 0;
+}
+
+.profile-info :nth-child(4){
+    margin-top: -1em;
 }
 
 .profile-info>*{
@@ -149,13 +177,34 @@ header img{
 .buttons{
     display: flex;
     justify-content: space-between;
+    padding: 20px 90px 0 90px;
 }
 
 .buttons img{
     background-color: white;
     border-radius: 50%;
-    padding: 5px;
+    padding: 15px;
 }
+
+/* Code used from https://www.w3schools.com/howto/howto_css_arrows.asp */
+.arrow {
+    border: solid black;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  .btn-toggle {
+    border: none;
+    background-color: white;
+    opacity: 0.5;
+    cursor: pointer;
+} 
 
 /* styling matches page */
 .matches-list{
@@ -183,22 +232,92 @@ header img{
 }
 /* end styling matches page */
 
-/* Code used from https://www.w3schools.com/howto/howto_css_arrows.asp */
-.arrow {
-    border: solid black;
-    border-width: 0 5px 5px 0;
-    display: inline-block;
-    padding: 3px;
-  }
-  
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
+/* styling account page */
 
-  .btn-toggle {
-    border: none;
-    background-color: white;
-    opacity: 0.5;
-    cursor: pointer;
-} 
+.account-page{
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 21em;
+    padding-bottom: 20px;
+}
+
+.account-img-container{
+    height: 20em;
+    background-image: url(img/ammika-harris.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+.account-profile-info{
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.account-profile-info h1{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    margin:0;
+}
+
+.account-profile-info :nth-child(2){
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.account-profile-info p{
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    text-transform: uppercase;
+    color: grey;
+    font-size: 16px;
+}
+
+.account-page h2{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.account-page p{
+    font-family: 'Raleway', sans-serif;
+}
+
+.account-interests ul{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.account-interests li{
+    font-family: 'Raleway', sans-serif;
+    list-style: none;
+    background-color:thistle;
+    padding: 15px 20px;
+    border-radius: 45%;
+}
+
+.account-page button{
+    padding: 15px;
+}
+
+.account-page button a{
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: black;
+}
+
+/*
+used fonts
+font-family: 'Montserrat', sans-serif; Kopjes
+font-family: 'Raleway', sans-serif; Lopende tekst
+font-family: 'Ubuntu', sans-serif; Titels
+*/
+
