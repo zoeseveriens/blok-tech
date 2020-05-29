@@ -1,10 +1,26 @@
 
 
-const express = require('express')
-const ejs = require('ejs')
-const ejsLint = require('ejs-lint')
-const slug = require('slug')
-const bodyParser = require('body-parser')
+const express = require('express');
+const mongo = require('mongodb');
+const ejs = require('ejs');
+const ejsLint = require('ejs-lint');
+const slug = require('slug');
+const bodyParser = require('body-parser');
+
+//Connecting with database
+require('dotenv').config();
+
+const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
+let db;
+
+mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log('Database is connected');
+    }
+    db = client.db(process.env.DB_NAME);
+  });
 
 
 const data = [
@@ -23,6 +39,9 @@ const data = [
 
 ]
 
+const interests = []
+
+//Express server setup
 express()
     .use(express.static('static')) //serveer de bestanden die in mijn mapje static staan
     .use(bodyParser.urlencoded({extended:true}))
@@ -30,7 +49,10 @@ express()
     .set('views', 'view')  //al mijn views staan in het mapje view
     .get('/foryou', forYou)
     .post('/likes', add)
+    .post('/account', addInterests)
     .get('/likes', likes)
+    .get('/account', account)
+    .get('/edit-account', editAccount)
     .get('/about', about)
     .get('/404', notFound)
     .listen(8000)
@@ -55,8 +77,30 @@ express()
         
       }
 
+    function addInterests(req, res) {
+        console.log(req.body.point);
+        var id = slug(req.body.point).toLowerCase()
+
+      
+        interests.push({
+          id: id,
+          point: req.body.point
+        })
+      
+        res.redirect('/account')
+        
+      }
+
     function likes (req, res){
         res.render('likes.ejs', {data: data})
+    }
+
+    function account (req, res){
+        res.render('account.ejs', {data: interests})
+    }
+
+    function editAccount (req, res){
+        res.render('edit-account.ejs')
     }
 
     function about(req, res){
