@@ -2,27 +2,54 @@
 
 const express = require('express');
 const mongo = require('mongodb');
+const mongoose = require('mongoose');
 const ejs = require('ejs');
 const ejsLint = require('ejs-lint');
 const slug = require('slug');
 const bodyParser = require('body-parser');
 
 //Connecting with database
+// require('dotenv').config();
+
+// const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
+// let db;
+
+// mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+//     if (err) {
+//       throw err;
+//     } else {
+//       console.log('Database is connected');
+//     }
+//     db = client.db(process.env.DB_NAME);
+//   });
+  
+//Connecting database with mongoose
 require('dotenv').config();
 
 const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
-let db;
 
-mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-    if (err) {
+mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true}, (err, client) =>{
+      if (err) {
       throw err;
     } else {
       console.log('Database is connected');
     }
-    db = client.db(process.env.DB_NAME);
-  });
+});
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+//Data in the server
 const data = [
     {
         id: 'shane',

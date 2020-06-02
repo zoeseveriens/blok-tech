@@ -2,7 +2,7 @@
 <%- include('partials/header'); -%>
 <body>
 
-<h1>Your likes</h1>
+<h1>Your matches</h1>
 <% for (var index = 0; index < data.length; index++) { %>
 <h2><a href="/<%= data[index].id %>"><%= data[index].name %></a></h2>
 <p><%= data[index].age %></p>

@@ -7,9 +7,9 @@ font-family: 'Ubuntu', sans-serif; Titels
 
 body{
     margin: 0;
-    /* background-color:#F2EBD9; */
-    background-color: whitesmoke;
+    background-color: #FBF2E8;
 }
+
 
 /* styling main navigation bar*/
 
@@ -39,16 +39,17 @@ header ul{
 
 header img{
     cursor: pointer;
+    width: 45px;
 }
 
 .btn-toggle-nav{
     width: 60px;
     height: 60px;
     background-color: none;
-    background-image: url(img/hamburger.png);
+    background-image: url(img/hamburger-icon.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 50%;
+    background-size: 80%;
     cursor: pointer;
 }
 
@@ -62,7 +63,8 @@ header img{
     bottom: 0;
     width: 0px;
     height: calc(100vh - 60px);
-    background-color: thistle;
+    background-color:#4C4B85;
+    color: white;
     z-index: 1000;
     transition: all 0.3s ease-in-out;
 }
@@ -95,11 +97,13 @@ header img{
     white-space: nowrap;
     opacity: 0;
     transition: all 0.3s ease-in-out;
+    color: white;
 }
 
 .nav-sidebar ul li a:hover{
-    color: #222;
+    color: #EF9398;
 }
+
 
 /* end styling side navigation bar*/
 
@@ -145,6 +149,7 @@ section{
   .profile-info h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
+    color:#4C4B85;
   }
 
   .profile-info p{
@@ -178,12 +183,16 @@ section{
     display: flex;
     justify-content: space-between;
     padding: 20px 90px 0 90px;
+    cursor: pointer;
 }
 
 .buttons img{
     background-color: white;
+    border: solid 1.2px;
+    border-color: #DF8B90;
     border-radius: 50%;
-    padding: 15px;
+    padding: 5px;
+    width: 60px;
 }
 
 /* Code used from https://www.w3schools.com/howto/howto_css_arrows.asp */
@@ -261,6 +270,7 @@ section{
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     margin:0;
+    color:#4C4B85;
 }
 
 .account-profile-info :nth-child(2){
@@ -297,9 +307,12 @@ section{
 .account-interests li{
     font-family: 'Raleway', sans-serif;
     list-style: none;
-    background-color:thistle;
-    padding: 15px 20px;
-    border-radius: 45%;
+    background-color:#4C4B85;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 35%;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .account-page button{
@@ -309,9 +322,15 @@ section{
 .account-page button a{
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
     font-weight: 500;
     text-transform: uppercase;
     color: black;
+} 
+
+.edit-profile-button img{
+    width: 40px;
+
 }
 
 /*
