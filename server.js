@@ -58,7 +58,7 @@ const data = [
 
 ]
 
-//empty array
+//Lege array waar de interest komt die de user invult
 const interests = []
 
 //Express server setup
@@ -79,8 +79,40 @@ express()
 
     function forYou (req, res){
         res.render('foryou.ejs')
-    }
+    };
 
+//haalt data uit de server (werkt niet)
+//     function editAccount (req, res, next){
+//       db.collection('userinterests').insertOne({
+//         interests: req.body.point,
+//       }, done)
+
+
+//     function done (err, data) {
+//       if (err){
+//         next (err)
+//       } else {
+//         res.redirect('/account')
+//       }
+//     }
+//     }
+
+//     function account (req, res, next) {
+//       db.collection('userinterests').find()toArray(done)
+
+//       function done(err, data){
+//         if (err){
+//           next (err)
+//         } else {
+//           res.render('account.ejs', {data: data})
+//         }
+//       }
+//     }
+// //
+
+
+
+    //code van de college les
     function add(req, res) {
         console.log(req.body.name);
 
