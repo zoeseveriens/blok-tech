@@ -4,8 +4,7 @@ const express = require('express');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
-const ejsLint = require('ejs-lint');
-const slug = require('slug');
+const eslint = require('eslint');
 const bodyParser = require('body-parser');
 
 //Connecting with database
@@ -27,6 +26,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
+const db = process.env.DB_NAME;
 
 mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true}, (err, client) =>{
       if (err) {
@@ -34,19 +34,11 @@ mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true}, (err, 
     } else {
       console.log('Database is connected');
     }
+  
 });
 
-
-
-
-
-
-
-
-
-
-
-
+// Require model
+const your_profile = require("./model/your_profile.js");
 
 
 //Data in the server
@@ -66,6 +58,7 @@ const data = [
 
 ]
 
+//empty array
 const interests = []
 
 //Express server setup
@@ -78,7 +71,7 @@ express()
     .post('/likes', add)
     .post('/account', addInterests)
     .get('/likes', likes)
-    .get('/account', account)
+    .get('/account', account) //lijst met interests
     .get('/edit-account', editAccount)
     .get('/about', about)
     .get('/404', notFound)
@@ -90,11 +83,9 @@ express()
 
     function add(req, res) {
         console.log(req.body.name);
-        var id = slug(req.body.name).toLowerCase()
 
       
         data.push({
-          id: id,
           name: req.body.name,
           age: req.body.age,
           description: req.body.description
@@ -106,11 +97,9 @@ express()
 
     function addInterests(req, res) {
         console.log(req.body.point);
-        var id = slug(req.body.point).toLowerCase()
 
       
         interests.push({
-          id: id,
           point: req.body.point
         })
       
@@ -122,8 +111,8 @@ express()
         res.render('likes.ejs', {data: data})
     }
 
-    function account (req, res){
-        res.render('account.ejs', {data: interests})
+     function account (req, res){
+         res.render('account.ejs', {data: interests})
     }
 
     function editAccount (req, res){

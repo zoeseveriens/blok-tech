@@ -1,10 +1,10 @@
 <%- include('partials/account-header'); -%>
 <body>
 
-      <section class="account-page">
-          <div class="account-img-container">
-          </div>
+  <h1 class="page-title">Edit your profile</h1>
 
+  <section class="account-page">
+     <div class="account-img-container"></div>
           <div class="account-profile-info">
              <h1>Ammika Harris, 23</h1>
              <h1>Amsterdam</h1>
@@ -12,24 +12,23 @@
          </div> 
          
 
-          <h2>About me</h2>
-          <p>I love to travel. I am always outside so I don't really like to stay at home all day, but if I do I like to read.</p>
+        <h2>About me</h2>
+        <p>I love to travel. I am always outside so I don't really like to stay at home all day, but if I do I like to read.</p>
 
-          <div class="account-interests">
-              <h2>Interests</h2>
-                <ul>
-                 <li>Traveling</li>
-                 <li>Cooking</li>
-                 <li>Reading</li>
-                 <li>Shopping</li>
-                </ul>
+         <div class="account-interests">
+             <h2>Interests</h2>
+               <ul>
+               <li>Traveling</li>
+               <li>Cooking</li>
+               <li>Reading</li>
+               <li>Shopping</li>
+               </ul>
          </div>
+
          <form method="POST" action="/account">
-            <label>
-                What are some of your interests?
-                 <input type="text" name="point"> 
-            </label>
-           <button>add</button>
+            <label>What are some of your interests?</label>
+            <input type="text" name="point"> 
+            <input class="add-button" type="submit" value="add">
         </form>
         <button><a href="/account">Cancel</a></button>
          
