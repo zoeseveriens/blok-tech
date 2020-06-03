@@ -23,7 +23,7 @@ const bodyParser = require('body-parser');
 //   });
   
 //Connecting database with mongoose
-require('dotenv').config();
+require('dotenv').config(); //haalt de gevoelige data uit mijn .env file 
 
 const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
 const db = process.env.DB_NAME;
