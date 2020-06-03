@@ -315,8 +315,14 @@ section{
     margin-bottom: 10px;
 }
 
+.edit-profile-button img{
+    width: 40px;
+}
+
 .account-page button{
     padding: 15px;
+    background-color: #F8C35E;
+    margin-top: 30px;
 }
 
 .account-page button a{
@@ -328,10 +334,25 @@ section{
     color: black;
 } 
 
-.edit-profile-button img{
-    width: 40px;
-
+.account-page label{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
 }
+
+.account-page input{
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    padding: 3px;
+    margin-top: 20px;
+}
+
+.add-button {
+    background-color: #F8C35E;
+    border: none;
+    margin-left: 5px;
+}
+
 
 /*
 used fonts
