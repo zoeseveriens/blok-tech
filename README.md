@@ -19,10 +19,10 @@ De main feature van mijn app is data (oftewel interesses) kunnen toevoegen en ve
 ## Packages
 Een aantal packages die ik geïnstalleerd heb om mijn web applicatie te kunnen maken.
 
-`Express` Een flexibele Node.js web framework met features om web en mobiele applicaties te kunnen maken
-`EJS` Embedded JavaScript templates
-`ESLint` Een tool voor het analyseren van problematische patronen in je JavaScript code die je ook zelf kunt aanpassen
-`MongoDB` Een opensource database
-`Mongoose` Een MongoDB object modeling tool. Wordt gebruikt om objecten in code en de weergave van die objecten in MongoDB te vertalen
-`Body-parser` Haalt data uit het formulier (de body)
+`Express` Een flexibele Node.js web framework met features om web en mobiele applicaties te kunnen maken  
+`EJS` Embedded JavaScript templates  
+`ESLint` Een tool voor het analyseren van problematische patronen in je JavaScript code die je ook zelf kunt aanpassen  
+`MongoDB` Een opensource database  
+`Mongoose` Een MongoDB object modeling tool. Wordt gebruikt om objecten in code en de weergave van die objecten in MongoDB te vertalen  
+`Body-parser` Haalt data uit het formulier (de body)  
 https://www.npmjs.com/
