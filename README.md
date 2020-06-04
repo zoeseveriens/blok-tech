@@ -1,5 +1,8 @@
 # Match Me
 
+## Static site
+https://zoeseveriens.github.io/dating-app/static/index.html
+
 ## Job Story
 Wanneer ik nieuwe interesses heb, wil ik deze kunnen toevoegen aan mijn profiel, zodat mijn profiel altijd up to date is.
 
