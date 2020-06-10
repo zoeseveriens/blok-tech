@@ -5,6 +5,7 @@ const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
 const eslint = require('eslint');
+const ejslint = require ('ejs-lint')
 const bodyParser = require('body-parser');
 
 //Connecting with database
@@ -39,6 +40,19 @@ mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true}, (err, 
 
 // Require model
 const your_profile = require("./model/your_profile.js");
+
+//Creating an instance of the model user interests
+// moet in de server.js
+const UserInterestsList = new UserInterests({Interests : 'Skydiving'}); //dit is wat je ziet op je account page
+
+
+UserInterestsList.save(function (err){
+  if (err) {
+    throw err;
+  } else {
+    console.log('Interest is saved!');
+  }
+});
 
 
 //Data in the server
@@ -80,35 +94,6 @@ express()
     function forYou (req, res){
         res.render('foryou.ejs')
     };
-
-//haalt data uit de server (werkt niet)
-//     function editAccount (req, res, next){
-//       db.collection('userinterests').insertOne({
-//         interests: req.body.point,
-//       }, done)
-
-
-//     function done (err, data) {
-//       if (err){
-//         next (err)
-//       } else {
-//         res.redirect('/account')
-//       }
-//     }
-//     }
-
-//     function account (req, res, next) {
-//       db.collection('userinterests').find()toArray(done)
-
-//       function done(err, data){
-//         if (err){
-//           next (err)
-//         } else {
-//           res.render('account.ejs', {data: data})
-//         }
-//       }
-//     }
-// //
 
 
 
