@@ -325,6 +325,8 @@ section{
     margin-bottom: 10px;
 }
 
+/* styling eddit account page*/
+
 .edit-profile-button img{
     width: 40px;
 }
@@ -348,6 +350,10 @@ section{
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 18px;
+}
+
+.account-page textarea{
+    width: 336px;
 }
 
 .account-page input{
