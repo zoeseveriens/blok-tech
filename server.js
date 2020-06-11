@@ -19,7 +19,7 @@ express()
     .get('/foryou', forYou)
     .get('/likes', likes)
     .get('/account', account) //lijst met interests
-    .get('/edit-account', editAccount)
+    .get ('/edit-account', editAccount)
     .get('/404', notFound)
 
     .post('/likes', add)
@@ -78,10 +78,13 @@ function account (req, res, next) {
   }
 }
 
+
+
 //Voegt iets toe aan de database
 function addInterests (req, res, next) {
 
   db.collection('interests').insertOne({
+    about: req.body.about,
     interest : req.body.interest
   }, done)
 
