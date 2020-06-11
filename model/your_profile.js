@@ -17,16 +17,3 @@ const UserInterestsSchema = new Schema({
 const UserInterests = mongoose.model('UserInterests', UserInterestsSchema);
 
 module.exports = UserInterests;
-
-//Creating an instance of the model user interests
-// moet in de server.js
-const UserInterestsList = new UserInterests({Interests : 'Skydiving'}); //dit is wat je ziet op je account page
-
-
-UserInterestsList.save(function (err){
-  if (err) {
-    throw err;
-  } else {
-    console.log('Interest is saved!');
-  }
-});

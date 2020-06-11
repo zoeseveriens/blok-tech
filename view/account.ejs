@@ -3,39 +3,27 @@
 
       <h1 class="page-title">Your profile</h1>
 
-      <section class="account-page">
-          <div class="account-img-container">
-          </div>
+      <h2>About me</h2>
 
-          <div class="account-profile-info">
-             <h1>Ammika Harris, 23</h1>
-             <h1>Amsterdam</h1>
-             <p>Influencer</p>
-         </div> 
-         
+      <form action="/quotes" method="POST">
+            <input type="text" placeholder="name" name="name">
+            <input type="text" placeholder="quote" name="quote">
+            <button type="submit">Submit</button>
+          </form>
 
-          <h2>About me</h2>
-          <p>I love to travel. I am always outside so I don't really like to stay at home all day, but if I do I like to read.</p>
+          <h2> Quotes </h2>
 
-          <div class="account-interests">
-
-            <h2>Interests</h2>
-            <ul>
-             <li>Traveling</li>
-             <li>Cooking</li>
-             <li>Reading</li>
-             <li>Shopping</li>
-    
-            <% for (var index = 0; index < data.length; index++) { %>
-                
-                  <li><%= data[index].point %></li>
-                  <% } %>
-            </ul>
-            
-         </div>
-         <a class="edit-profile-button" href="/edit-account"><img src="img/edit-icon.png" alt="edit icon"></a>
-
-        
+          <ul class="quotes">
+            <!-- Loop through quotes -->
+            <% for(var i = 0; i < data.length; i++) {%>
+              <li class="quote">
+                <!-- Output name from the iterated quote object -->
+                <span><%= data[i].name %></span>:
+                <!-- Output quote from the iterated quote object -->
+                <span><%= data[i].quote %></span>
+              </li>
+            <% } %>
+          </ul>
 
       </section>
 
