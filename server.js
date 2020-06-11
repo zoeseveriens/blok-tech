@@ -4,42 +4,96 @@ const express = require('express');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
+const ejslint = require('ejs-lint');
 const eslint = require('eslint');
 const bodyParser = require('body-parser');
 
+//Express server setup
+express()
+    .use(express.static('static')) //serveer de bestanden die in mijn mapje static staan
+    .use(bodyParser.urlencoded({extended:true}))
+
+    .set('view engine', 'ejs') //express gaat de viewengine ejs vanaf nu gebruiken
+    .set('views', 'view')  //al mijn views staan in het mapje view
+
+    .get('/foryou', forYou)
+    .get('/likes', likes)
+    .get('/account', account) //lijst met interests
+    .get('/edit-account', editAccount)
+    .get('/404', notFound)
+
+    .post('/likes', add)
+    .post('/account', addInterests)
+
+    .listen(8000)
+
 //Connecting with database
-// require('dotenv').config();
-
-// const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
-// let db;
-
-// mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-//     if (err) {
-//       throw err;
-//     } else {
-//       console.log('Database is connected');
-//     }
-//     db = client.db(process.env.DB_NAME);
-//   });
-  
-//Connecting database with mongoose
-require('dotenv').config(); //haalt de gevoelige data uit mijn .env file 
+require('dotenv').config();
 
 const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
-const db = process.env.DB_NAME;
+let db;
 
-mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true}, (err, client) =>{
-      if (err) {
+mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+    if (err) {
       throw err;
     } else {
       console.log('Database is connected');
     }
+    db = client.db('profile-interests');
+  });
   
-});
+//Connecting database with mongoose
+// require('dotenv').config(); //haalt de gevoelige data uit mijn .env file 
 
-// Require model
-const your_profile = require("./model/your_profile.js");
+// const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
+// const db = process.env.DB_NAME;
 
+// mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true}, (err, client) =>{
+//       if (err) {
+//       throw err;
+//     } else {
+//       console.log('Database is connected');
+//     }
+  
+// });
+
+// // Require model
+// const your_profile = require("./model/your_profile.js");
+
+https://zellwk.com/blog/crud-express-mongodb/
+
+function account (req, res, next) {
+  
+  db.collection('interests').find().toArray(done)
+
+  function done(err, data) {
+    if (err) {
+      next (err)
+    } else {
+      res.render('account.ejs', {
+        data: data
+      })
+
+    }
+  }
+}
+
+//Voegt iets toe aan de database
+function addInterests (req, res, next) {
+
+  db.collection('interests').insertOne({
+    interest : req.body.interest
+  }, done)
+
+  function done(err, data) {
+    if (err) {
+      next(err)
+    } else {
+      console.log(req.body)
+      res.redirect('/account')
+    }
+  }
+}
 
 //Data in the server
 const data = [
@@ -61,56 +115,10 @@ const data = [
 //Lege array waar de interest komt die de user invult
 const interests = []
 
-//Express server setup
-express()
-    .use(express.static('static')) //serveer de bestanden die in mijn mapje static staan
-    .use(bodyParser.urlencoded({extended:true}))
-    .set('view engine', 'ejs') //express gaat de viewengine ejs vanaf nu gebruiken
-    .set('views', 'view')  //al mijn views staan in het mapje view
-    .get('/foryou', forYou)
-    .post('/likes', add)
-    .post('/account', addInterests)
-    .get('/likes', likes)
-    .get('/account', account) //lijst met interests
-    .get('/edit-account', editAccount)
-    .get('/about', about)
-    .get('/404', notFound)
-    .listen(8000)
 
     function forYou (req, res){
         res.render('foryou.ejs')
     };
-
-//haalt data uit de server (werkt niet)
-//     function editAccount (req, res, next){
-//       db.collection('userinterests').insertOne({
-//         interests: req.body.point,
-//       }, done)
-
-
-//     function done (err, data) {
-//       if (err){
-//         next (err)
-//       } else {
-//         res.redirect('/account')
-//       }
-//     }
-//     }
-
-//     function account (req, res, next) {
-//       db.collection('userinterests').find()toArray(done)
-
-//       function done(err, data){
-//         if (err){
-//           next (err)
-//         } else {
-//           res.render('account.ejs', {data: data})
-//         }
-//       }
-//     }
-// //
-
-
 
     //code van de college les
     function add(req, res) {
@@ -127,32 +135,12 @@ express()
         
       }
 
-    function addInterests(req, res) {
-        console.log(req.body.point);
-
-      
-        interests.push({
-          point: req.body.point
-        })
-      
-        res.redirect('/account')
-        
-      }
-
     function likes (req, res){
         res.render('likes.ejs', {data: data})
     }
 
-     function account (req, res){
-         res.render('account.ejs', {data: interests})
-    }
-
     function editAccount (req, res){
         res.render('edit-account.ejs')
-    }
-
-    function about(req, res){
-       res.status(200).send('about page')
     }
 
     function notFound(req, res){
