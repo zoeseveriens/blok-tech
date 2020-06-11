@@ -10,24 +10,13 @@
              <h1>Amsterdam</h1>
              <p>Influencer</p>
          </div> 
-         
-
-        <h2>About me</h2>
-        <p>I love to travel. I am always outside so I don't really like to stay at home all day, but if I do I like to read.</p>
-
-         <div class="account-interests">
-             <h2>Interests</h2>
-               <ul>
-               <li>Traveling</li>
-               <li>Cooking</li>
-               <li>Reading</li>
-               <li>Shopping</li>
-               </ul>
-         </div>
+        
 
          <form method="POST" action="/account">
+            <label>Tell something about yourself</label>
+            <textarea name="about" id="about" cols="30" rows="10"></textarea>
             <label>What are some of your interests?</label>
-            <input type="text" name="point"> 
+            <input type="text" name="interest"> 
             <input class="add-button" type="submit" value="add">
         </form>
         <button><a href="/account">Cancel</a></button>
