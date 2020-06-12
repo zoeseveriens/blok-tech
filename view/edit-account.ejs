@@ -10,28 +10,33 @@
              <h1>Amsterdam</h1>
              <p>Influencer</p>
          </div> 
-         
+        
 
-        <h2>About me</h2>
-        <p>I love to travel. I am always outside so I don't really like to stay at home all day, but if I do I like to read.</p>
 
-         <div class="account-interests">
-             <h2>Interests</h2>
-               <ul>
-               <li>Traveling</li>
-               <li>Cooking</li>
-               <li>Reading</li>
-               <li>Shopping</li>
-               </ul>
-         </div>
+        <fieldset>
 
-         <form method="POST" action="/account">
-            <label>What are some of your interests?</label>
-            <input type="text" name="point"> 
+           <h2>Delete Interests</h2>
+           
+            <div class="account-interests">
+                  <ul>
+                     <% for (var index = 0; index < data.length; index++) { %>
+                        <li><%= data[index].interest %></li>
+                        
+                        <% } %>
+                   </ul>
+             </div>
+
+
+           <form method="POST" action="/interests">
+            <label>What are some of your interests? (add interests)</label>
+            <input type="text" name="interest"> 
             <input class="add-button" type="submit" value="add">
-        </form>
+           </form>
+
+        </fieldset>
+
         <button><a href="/account">Cancel</a></button>
-         
+        <!-- <button><a href="/account">Save</a></button> -->
 
       </section>
 

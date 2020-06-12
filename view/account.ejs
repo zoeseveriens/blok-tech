@@ -3,27 +3,42 @@
 
       <h1 class="page-title">Your profile</h1>
 
-      <h2>About me</h2>
+      <section class="account-page">
+          <div class="account-img-container">
+          </div>
 
-      <form action="/quotes" method="POST">
-            <input type="text" placeholder="name" name="name">
-            <input type="text" placeholder="quote" name="quote">
-            <button type="submit">Submit</button>
-          </form>
+          <div class="account-profile-info">
+             <h1>Ammika Harris, 23</h1>
+             <h1>Amsterdam</h1>
+             <p>Influencer</p>
+         </div> 
+      
+         <h2>About me</h2>
+                        <% for (var index = 0; index < data.length; index++) { %>
+                           <p><%= data[index].about %></p>
+                           
+                           <% } %> 
+                           <button><a href="/edit-about">Update about</a></button>
 
-          <h2> Quotes </h2>
+            
+            <h2>Interests</h2>
+           
+                  <div class="account-interests">
+                        <ul>
+                              <% for (var index = 0; index < data.length; index++) { %>
+                              <li><%= data[index].interest %></li>
+                              
+                              <% } %>
+                         </ul>
+                         <button><a href="/edit-interests">add/remove interests</a></button>
+                   </div>
+                   
 
-          <ul class="quotes">
-            <!-- Loop through quotes -->
-            <% for(var i = 0; i < data.length; i++) {%>
-              <li class="quote">
-                <!-- Output name from the iterated quote object -->
-                <span><%= data[i].name %></span>:
-                <!-- Output quote from the iterated quote object -->
-                <span><%= data[i].quote %></span>
-              </li>
-            <% } %>
-          </ul>
+
+            
+         <a class="edit-profile-button" href="/edit-interests"><img src="img/edit-icon.png" alt="edit icon"></a>
+
+        
 
       </section>
 
