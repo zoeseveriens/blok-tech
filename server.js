@@ -15,11 +15,11 @@ express()
     .set('views', 'view')  //al mijn views staan in het mapje view
 
     .get('/foryou', forYou)
-    .get('/account', getAccount) //Dit is jouw account pagina
-    .get ('/account', getAboutInfo)
-    .get ('/edit-interests', getEditAccount) //Hier zie je de lijst met interests
+    .get('/account', account) //Dit is jouw account pagina
+    // .get ('/account', getAboutInfo)
+    .get ('/edit-account', getEditProfilePage) //Hier zie je de lijst met interests
 
-    .post('/interests', addInterests)// voegt interest toe op de edit page vanaf edit page
+    .post('/account', addInterests)// voegt interest toe op de edit page vanaf edit page
     // .post('/account', addAboutInfo) //voegt info toe op account page vanaf edit page
 
     .listen(5000, function() {
@@ -45,10 +45,10 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
 
 https://zellwk.com/blog/crud-express-mongodb/
 
-//laat de interests zien op je profielpagina die je net hebt toegevoegt of verwijderd
-function getAccount (req, res, next) {
+//Dit is je account pagina
+function account (req, res, next) {
   
-  db.collection('about').find().toArray(done)
+  db.collection('users').find().toArray(done)
 
   function done(err, data) {
     if (err) {
@@ -62,62 +62,21 @@ function getAccount (req, res, next) {
   }
 }
 
-//laat meteen de interests zien die op je profiel staan wanneer je ze aan het toevoegen of verwijderen bent
-function getEditAccount (req, res, next) {
-  
-  db.collection('interests-list').find().toArray(done)
-
-  function done(err, data) {
-    if (err) {
-      next (err)
-    } else {
-      res.render('edit-account.ejs', {
-        data: data
-      })
-
-    }
-  }
+//Dit is de edit account pagina
+function getEditProfilePage (req, res) {
+  res.render('edit-account.ejs')
 }
-
-//laat de about info die is opgeslagen vanaf de edit page zien op de account page
-function getAboutInfo (req, res, next) {
-  
-  db.collection('about').find().toArray(done)
-
-  function done(err, data) {
-    if (err) {
-      next (err)
-    } else {
-      res.render('account.ejs', {
-        data: data
-      })
-
-    }
-  }
-}
-
-//voegt about info toe aan de database vanaf de edit page
-// function addAboutInfo (req, res, next) {
-
-//   db.collection('about').insertOne({ s
-//     about : req.body.about
-//   }, done)
-
-//   function done(err, data) {
-//     if (err) {
-//       next(err)
-//     } else {
-//       console.log(req.body)
-//       res.redirect('/account')
-//     }
-//   }
-// }
 
 
 //Voegt een interest toe aan de database op de edit profile page
+
 function addInterests (req, res, next) {
 
-  db.collection('interests-list').insertOne({
+  db.collection('users').insertOne({
+    name: req.body.name,
+    age: req.body.age,
+    profession: req.body.profession,
+    about: req.body.about,
     interest : req.body.interest
   }, done)
 
@@ -126,12 +85,10 @@ function addInterests (req, res, next) {
       next(err)
     } else {
       console.log(req.body)
-      res.redirect('/edit-interests')
+      res.redirect('/account')
     }
   }
 }
-
-
 
     function forYou (req, res){
         res.render('foryou.ejs')

@@ -3,40 +3,47 @@
 
   <h1 class="page-title">Edit your profile</h1>
 
-  <section class="account-page">
+  <section class="edit-account-page">
      <div class="account-img-container"></div>
-          <div class="account-profile-info">
-             <h1>Ammika Harris, 23</h1>
-             <h1>Amsterdam</h1>
-             <p>Influencer</p>
-         </div> 
-        
 
+     <!-- <form method="POST" action="/account" enctype="multipart/form-data">
+        <label for="">Name</label>
+        <input type="text" name="name">
+        <label for="">Age</label>
+        <input type="number" name="age">
+        <label for="">Profession</label>
+        <input type="text" name="profession">
+        <h1>Tell something about yourself</h1>
+        <label for="">About me:</label>
+        <input type="text" name="about">
+        <h1>What are some of your interests?</h1>
+        <label for="">1</label>
+        <input type="text" name="interests[]">
+        <label for="">2</label>
+        <input type="text" name="interests[]">
+        <label for="">3</label>
+        <input type="text" name="interests[]">
+        <input class="add-button" type="submit" value="save">
+     </form> -->
 
-        <fieldset>
+     <form method="POST" action="/account">
+      <label>Name</label>
+      <input type="text" name="name">
+      <label>Age</label>
+      <input type="number" name="age">
+      <label>Profession</label>
+      <input type="text" name="profession">
+      <h1>Tell something about yourself</h1>
+      <label>About me:</label>
+      <textarea name="about" id="about" cols="30" rows="10"></textarea>
+      <h1>What are some of your interests?</h1>
+      <label>1</label>
+      <input type="text" name="interest"> 
+      <input class="add-button" type="submit" value="save">
+  </form>
 
-           <h2>Delete Interests</h2>
-           
-            <div class="account-interests">
-                  <ul>
-                     <% for (var index = 0; index < data.length; index++) { %>
-                        <li><%= data[index].interest %></li>
-                        
-                        <% } %>
-                   </ul>
-             </div>
-
-
-           <form method="POST" action="/interests">
-            <label>What are some of your interests? (add interests)</label>
-            <input type="text" name="interest"> 
-            <input class="add-button" type="submit" value="add">
-           </form>
-
-        </fieldset>
 
         <button><a href="/account">Cancel</a></button>
-        <!-- <button><a href="/account">Save</a></button> -->
 
       </section>
 
