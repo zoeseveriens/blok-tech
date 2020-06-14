@@ -1,8 +1,6 @@
-
-
 const express = require('express');
 const mongo = require('mongodb');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const ejs = require('ejs');
 const ejslint = require('ejs-lint');
 const eslint = require('eslint');
@@ -19,13 +17,15 @@ express()
     .get('/foryou', forYou)
     .get('/likes', likes)
     .get('/account', account) //lijst met interests
-    .get ('/edit-account', editAccount)
+    .get ('/edit-account', getEditProfilePage)
     .get('/404', notFound)
 
     .post('/likes', add)
-    .post('/account', addInterests)
+    .post('/account', updateProfile)
 
-    .listen(8000)
+    .listen(5000, function() {
+      console.log('listening on 5000') 
+    })
 
 //Connecting with database
 require('dotenv').config();
@@ -57,14 +57,13 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
   
 // });
 
-// // Require model
-// const your_profile = require("./model/your_profile.js");
 
 https://zellwk.com/blog/crud-express-mongodb/
 
+//Dit is je account pagina
 function account (req, res, next) {
   
-  db.collection('interests').find().toArray(done)
+  db.collection('users').find().toArray(done)
 
   function done(err, data) {
     if (err) {
@@ -79,11 +78,14 @@ function account (req, res, next) {
 }
 
 
+//voegt profiel info toe aan de database
 
-//Voegt iets toe aan de database
-function addInterests (req, res, next) {
+function updateProfile (req, res, next) {
 
-  db.collection('interests').insertOne({
+  db.collection('users').insertOne({
+    name: req.body.name,
+    age: req.body.age,
+    profession: req.body.profession,
     about: req.body.about,
     interest : req.body.interest
   }, done)
@@ -97,6 +99,13 @@ function addInterests (req, res, next) {
     }
   }
 }
+
+    function forYou (req, res){
+        res.render('foryou.ejs')
+    };
+
+
+
 
 //Data in the server
 const data = [
@@ -117,6 +126,11 @@ const data = [
 
 //Lege array waar de interest komt die de user invult
 const interests = []
+
+//Dit is de edit account pagina
+function getEditProfilePage (req, res) {
+  res.render('edit-account.ejs')
+}
 
 
     function forYou (req, res){
@@ -142,9 +156,6 @@ const interests = []
         res.render('likes.ejs', {data: data})
     }
 
-    function editAccount (req, res){
-        res.render('edit-account.ejs')
-    }
 
     function notFound(req, res){
         res.status(404).render('not-found.ejs')

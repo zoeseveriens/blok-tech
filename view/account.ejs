@@ -7,12 +7,18 @@
           <div class="account-img-container">
           </div>
 
-          <div class="account-profile-info">
-             <h1>Ammika Harris, 23</h1>
+          <div class="account-profile-info">           
+             <% for (var index = 0; index < data.length; index++) { %>
+                  <h1><%= data[index].name %> , <%= data[index].age %></h1>
+                  <% } %>
+
              <h1>Amsterdam</h1>
-             <p>Influencer</p>
+
+             <% for (var index = 0; index < data.length; index++) { %>
+                  <p><%= data[index].profession %></p>
+                  <% } %>
          </div> 
-         
+      
          <h2>About me</h2>
          <% for (var index = 0; index < data.length; index++) { %>
             <p><%= data[index].about %></p>
@@ -26,8 +32,7 @@
                               <% } %>
                          </ul>
                    </div>
-
-            
+                   
          <a class="edit-profile-button" href="/edit-account"><img src="img/edit-icon.png" alt="edit icon"></a>
 
         
