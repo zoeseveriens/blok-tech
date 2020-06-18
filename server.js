@@ -1,6 +1,5 @@
 const express = require('express');
 const mongo = require('mongodb');
-// const mongoose = require('mongoose');
 const ejs = require('ejs');
 const ejslint = require('ejs-lint');
 const eslint = require('eslint');
@@ -15,12 +14,10 @@ express()
     .set('views', 'view')  //al mijn views staan in het mapje view
 
     .get('/foryou', forYou)
-    .get('/likes', likes)
     .get('/account', account) //lijst met interests
     .get ('/edit-account', getEditProfilePage)
     .get('/404', notFound)
 
-    .post('/likes', add)
     .post('/account', updateProfile)
 
     .listen(5000, function() {
@@ -42,20 +39,6 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
     db = client.db('profile-interests');
   });
   
-//Connecting database with mongoose
-// require('dotenv').config(); //haalt de gevoelige data uit mijn .env file 
-
-// const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
-// const db = process.env.DB_NAME;
-
-// mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true}, (err, client) =>{
-//       if (err) {
-//       throw err;
-//     } else {
-//       console.log('Database is connected');
-//     }
-  
-// });
 
 
 https://zellwk.com/blog/crud-express-mongodb/
@@ -69,9 +52,7 @@ function account (req, res, next) {
     if (err) {
       next (err)
     } else {
-      res.render('account.ejs', {
-        data: data
-      })
+      res.render('account.ejs', {data: data})
 
     }
   }
@@ -95,37 +76,10 @@ function updateProfile (req, res, next) {
       next(err)
     } else {
       console.log(req.body)
-      res.redirect('/account')
+      res.redirect('/account', {data: data})
     }
   }
 }
-
-    function forYou (req, res){
-        res.render('foryou.ejs')
-    };
-
-
-
-
-//Data in the server
-const data = [
-    {
-        id: 'shane',
-        name: 'Shane',
-        age: '24',
-        description:'Love to travel',
-    },
-    {
-        id: 'daniel',
-        name: 'Daniel',
-        age: '22',
-        description:'...',
-    }
-
-]
-
-//Lege array waar de interest komt die de user invult
-const interests = []
 
 //Dit is de edit account pagina
 function getEditProfilePage (req, res) {
@@ -136,26 +90,6 @@ function getEditProfilePage (req, res) {
     function forYou (req, res){
         res.render('foryou.ejs')
     };
-
-    //code van de college les
-    function add(req, res) {
-        console.log(req.body.name);
-
-      
-        data.push({
-          name: req.body.name,
-          age: req.body.age,
-          description: req.body.description
-        })
-      
-        res.redirect('/likes')
-        
-      }
-
-    function likes (req, res){
-        res.render('likes.ejs', {data: data})
-    }
-
 
     function notFound(req, res){
         res.status(404).render('not-found.ejs')
