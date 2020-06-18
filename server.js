@@ -76,7 +76,7 @@ function updateProfile (req, res, next) {
       next(err)
     } else {
       console.log(req.body)
-      res.redirect('/account', {data: data})
+      res.redirect('/account')
     }
   }
 }

@@ -331,13 +331,13 @@ section{
     width: 40px;
 }
 
-.account-page button{
+.edit-account-page button{
     padding: 15px;
     background-color: #F8C35E;
     margin-top: 30px;
 }
 
-.account-page button a{
+.edit-account-page button a{
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
@@ -346,24 +346,25 @@ section{
     color: black;
 } 
 
-.account-page label{
+.edit-account-page label{
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 18px;
 }
 
-.account-page textarea{
+.edit-account-page textarea{
     width: 336px;
 }
 
-.account-page input{
+.edit-account-page input{
+    display: block;
     font-size: 16px;
     font-family: 'Raleway', sans-serif;
     padding: 3px;
     margin-top: 20px;
 }
 
-.add-button {
+.edit-add-button {
     background-color: #F8C35E;
     border: none;
     margin-left: 5px;
