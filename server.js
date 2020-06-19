@@ -95,17 +95,13 @@ async function getProfileResult(req, res) {
 	res.render('profile-result', {user: await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)})});
 }
 
-// function getProfileResult(req, res){
-//   res.status(200).send('it workssss')
-// }
-
 function deleteProfile(req, res) {
 	res.status(200).send('This will be the delete page');
 }
 
-function updateDataProfile(req, res) {
+function updateDataProfile(req, res, next) {
 	db.collection('users').updateOne({
-		'_id': mongo.ObjectID(req.session.user._id)},
+		_id: mongo.ObjectID(req.session.user._id)},
 	{$set: 
 			{ name: req.body.name,
         age: req.body.age,
@@ -119,6 +115,7 @@ function updateDataProfile(req, res) {
 		if (err) {
 			next(err);
 		} else {
+      console.log(req.session.user)
 			res.redirect('/profile-result');
 		}
 	}
