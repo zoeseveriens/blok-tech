@@ -21,11 +21,15 @@ express()
     .set('views', 'view')  //al mijn views staan in het mapje view
 
     .get('/foryou', forYou)
-    .get('/edit-account', getEditProfilePage)
-    .get('/account', getAccount)
     .get('/404', notFound)
 
-    .post('/account', addDataProfile)
+    .get('/edit-account', getEditProfilePage) //hier begin je
+    .get('/account', getAccount) //vanaf hier kun je updaten eventueel
+    .get('/profile-result', getProfileResult) //hier zie je je resultaat
+
+    .post('/edit-account', addDataProfile)
+    .post('/account', updateDataProfile)
+    .post('/profile-result', deleteProfile)
 
     .listen(5000, function() {
       console.log('listening on 5000') 
@@ -50,49 +54,7 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
 
 https://zellwk.com/blog/crud-express-mongodb/
 
-//Dit is je edit account pagina
-// function getAccount (req, res, next) {
-  
-//   db.collection('users').find().toArray(done)
-
-//   function done(err, data) {
-//     if (err) {
-//       next (err)
-//     } else {
-//       res.render('account.ejs', {data:data})
-
-//     }
-//   }
-// }
-
-// async function getAccount (req, res) {
-
-//   let currentUser = await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)});
-//   console.log(currentUser)
-//   res.render('account.ejs',{name: currentUser.name})
-// }
-
 //voegt profiel info toe aan de database
-
-// function addDataProfile (req, res, next) {
-
-//   db.collection('users').insertOne({
-//     name: req.body.name,
-//     age: req.body.age,
-//     profession: req.body.profession,
-//     about: req.body.about,
-//     interest : req.body.interest
-//   }, done)
-
-//   function done(err, data) {
-//     if (err) {
-//       next(err)
-//     } else {
-//       console.log(req.body)
-//       res.render('account.ejs')
-//     }
-//   }
-// }
 
 function addDataProfile (req, res) {
   req.session.user = {
@@ -128,13 +90,46 @@ function getEditProfilePage (req, res) {
   res.render('edit-account.ejs')
 }
 
+async function getProfileResult(req, res) {
+
+	res.render('profile-result', {user: await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)})});
+}
+
+// function getProfileResult(req, res){
+//   res.status(200).send('it workssss')
+// }
+
+function deleteProfile(req, res) {
+	res.status(200).send('This will be the delete page');
+}
+
+function updateDataProfile(req, res) {
+	db.collection('users').updateOne({
+		'_id': mongo.ObjectID(req.session.user._id)},
+	{$set: 
+			{ name: req.body.name,
+        age: req.body.age,
+        profession: req.body.profession,
+        about: req.body.about,
+        interest : req.body.interest}
+	}
+	, done);
+
+	function done(err, data) {
+		if (err) {
+			next(err);
+		} else {
+			res.redirect('/profile-result');
+		}
+	}
+}
+
     function forYou (req, res){
       if(req.session.user){
         res.render('foryou.ejs')
       } else{
         res.redirect('/404')
-      }
-        
+      }  
     };
 
     function notFound(req, res){
