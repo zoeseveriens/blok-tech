@@ -95,8 +95,22 @@ async function getProfileResult(req, res) {
 	res.render('profile-result', {user: await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)})});
 }
 
-function deleteProfile(req, res) {
-	res.status(200).send('This will be the delete page');
+// function deleteProfile(req, res) {
+// 	res.status(200).send('This will be the delete page');
+// }
+
+function deleteProfile(req, res, next){
+  db.collection('users').deleteOne({
+		_id: mongo.ObjectID(req.session.user._id)
+	}, done);
+
+	function done(err, data) {
+		if (err) {
+			next(err);
+		} else {
+			res.redirect('/edit-account');
+		}
+	}
 }
 
 function updateDataProfile(req, res, next) {
