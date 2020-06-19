@@ -21,11 +21,11 @@ express()
     .set('views', 'view')  //al mijn views staan in het mapje view
 
     .get('/foryou', forYou)
-    .get('/account', account) //lijst met interests
-    .get ('/edit-account', getEditProfilePage)
+    .get('/edit-account', getEditProfilePage)
+    .get('/account', getAccount)
     .get('/404', notFound)
 
-    .post('/account', updateProfile)
+    .post('/edit-account', addDataProfile)
 
     .listen(5000, function() {
       console.log('listening on 5000') 
@@ -50,8 +50,8 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
 
 https://zellwk.com/blog/crud-express-mongodb/
 
-//Dit is je account pagina
-function account (req, res, next) {
+//Dit is je edit account pagina
+function getEditProfilePage (req, res, next) {
   
   db.collection('users').find().toArray(done)
 
@@ -59,16 +59,19 @@ function account (req, res, next) {
     if (err) {
       next (err)
     } else {
-      res.render('account.ejs', {data: data})
+      res.render('edit-account.ejs', {data: data})
 
     }
   }
 }
 
+function getAccount (req, res){
+  res.status(200).render('account.ejs')
+}
 
 //voegt profiel info toe aan de database
 
-function updateProfile (req, res, next) {
+function addDataProfile (req, res, next) {
 
   db.collection('users').insertOne({
     name: req.body.name,
@@ -83,14 +86,9 @@ function updateProfile (req, res, next) {
       next(err)
     } else {
       console.log(req.body)
-      res.render('/account')
+      res.redirect('/edit-account')
     }
   }
-}
-
-//Dit is de edit account pagina
-function getEditProfilePage (req, res) {
-  res.render('edit-account.ejs')
 }
 
 
