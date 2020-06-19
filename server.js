@@ -4,11 +4,18 @@ const ejs = require('ejs');
 const ejslint = require('ejs-lint');
 const eslint = require('eslint');
 const bodyParser = require('body-parser');
+const session = require('express-session')
+require('dotenv').config();
 
 //Express server setup
 express()
     .use(express.static('static')) //serveer de bestanden die in mijn mapje static staan
     .use(bodyParser.urlencoded({extended:true}))
+    .use(session({
+      resave: false,
+      saveUninitialized: true,
+      secret: process.env.SESSION_SECRET
+    }))
 
     .set('view engine', 'ejs') //express gaat de viewengine ejs vanaf nu gebruiken
     .set('views', 'view')  //al mijn views staan in het mapje view
