@@ -25,7 +25,7 @@ express()
     .get('/account', getAccount)
     .get('/404', notFound)
 
-    .post('/edit-account', addDataProfile)
+    .post('/account', addDataProfile)
 
     .listen(5000, function() {
       console.log('listening on 5000') 
@@ -51,49 +51,90 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
 https://zellwk.com/blog/crud-express-mongodb/
 
 //Dit is je edit account pagina
-function getEditProfilePage (req, res, next) {
+// function getAccount (req, res, next) {
   
-  db.collection('users').find().toArray(done)
+//   db.collection('users').find().toArray(done)
 
-  function done(err, data) {
-    if (err) {
-      next (err)
-    } else {
-      res.render('edit-account.ejs', {data: data})
+//   function done(err, data) {
+//     if (err) {
+//       next (err)
+//     } else {
+//       res.render('account.ejs', {data:data})
 
-    }
-  }
-}
+//     }
+//   }
+// }
 
-function getAccount (req, res){
-  res.status(200).render('account.ejs')
-}
+// async function getAccount (req, res) {
+
+//   let currentUser = await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)});
+//   console.log(currentUser)
+//   res.render('account.ejs',{name: currentUser.name})
+// }
 
 //voegt profiel info toe aan de database
 
-function addDataProfile (req, res, next) {
+// function addDataProfile (req, res, next) {
 
-  db.collection('users').insertOne({
+//   db.collection('users').insertOne({
+//     name: req.body.name,
+//     age: req.body.age,
+//     profession: req.body.profession,
+//     about: req.body.about,
+//     interest : req.body.interest
+//   }, done)
+
+//   function done(err, data) {
+//     if (err) {
+//       next(err)
+//     } else {
+//       console.log(req.body)
+//       res.render('account.ejs')
+//     }
+//   }
+// }
+
+function addDataProfile (req, res) {
+  req.session.user = {
     name: req.body.name,
     age: req.body.age,
     profession: req.body.profession,
     about: req.body.about,
     interest : req.body.interest
-  }, done)
+  };
 
-  function done(err, data) {
-    if (err) {
-      next(err)
+  db.collection('users').insertOne(req.session.user, done);
+  function done(err, data){
+    if(err){
+      next(err);
     } else {
-      console.log(req.body)
-      res.redirect('/edit-account')
+      // console.log(req.session.user)
+      // console.log(req.session)
+      res.redirect('/account');
     }
   }
 }
 
+async function getAccount (req, res) {
+
+  let user = await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)});
+  console.log(user.name)
+  console.log(user)
+  res.render('account.ejs',{user})
+}
+
+
+function getEditProfilePage (req, res) {
+  res.render('edit-account.ejs')
+}
 
     function forYou (req, res){
+      if(req.session.user){
         res.render('foryou.ejs')
+      } else{
+        res.redirect('/404')
+      }
+        
     };
 
     function notFound(req, res){
