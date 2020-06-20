@@ -91,8 +91,11 @@ function getCreateProfilePage (req, res) {
 }
 
 async function getProfileResult(req, res) {
-
-	res.render('profile-result', {user: await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)})});
+  if (req.session.user){
+    res.render('profile-result', {user: await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)})});
+  } else {
+    res.redirect('/404')
+  }
 }
 
 // function deleteProfile(req, res) {

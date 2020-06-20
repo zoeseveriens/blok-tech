@@ -1,31 +1,37 @@
 <%- include('partials/account-header'); -%>
 <body>
-   
-  <h1 class="page-title">This is your final profile!</h1>
   
-
-
   <section class="account-page">
-     <div class="account-img-container"></div>
 
-     <p><%= user.name %></p>
-     <p><%= user.age %></p>
-     <p><%= user.profession %></p>
-     <p><%= user.about %></p>
-     <p><%= user.interest[0] %></p>
-     <p><%= user.interest[1] %></p>
-     <p><%= user.interest[2] %></p>
+    <h1 class="page-title">Welcome to your profile <%= user.name %></h1>
+
+    <div class="account-img-container"></div>
+
+    <div class="account-profile-info"> 
+       <h1><%= user.name %> , <%= user.age %></h1>
+        <h1>Amsterdam</h1>
+        <p><%= user.profession %></p>
+    </div> 
+
+   <h2>Bio</h2>
+   <p><%= user.about %></p>
+
+    <h2>Interests</h2>
+    <div class="account-interests">
+      <ul>
+            <li><%= user.interest[0] %></li>
+            <li><%= user.interest[1] %></li>
+            <li><%= user.interest[2] %></li>
+       </ul>
+     </div>
 
      <form method="POST" value="/profile-result">
-         <button>Delete account</button>
+      <button>Delete account</button>
      </form>
+   
+   </section>
 
-
-
-
-      </section>
-
-      <script src="script.js"></script>
-    
+  <script src="script.js"></script>
+  
 </body>
 </html>
