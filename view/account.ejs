@@ -20,7 +20,11 @@
       <textarea name="about" id="about" cols="30" rows="10"><%= user.about %></textarea>
       <h1>What are some of your interests?</h1>
       <label>1</label>
-      <input type="text" name="interest" value="<%= user.interest %>"> 
+      <input type="text" name="interest" value="<%= user.interest[0] %>"> 
+      <label>2</label>
+      <input type="text" name="interest" value="<%= user.interest[1] %>"> 
+      <label>3</label>
+      <input type="text" name="interest" value="<%= user.interest[2] %>"> 
       <input class="add-button" type="submit" value="save">
   </form>
 
