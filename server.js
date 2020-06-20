@@ -20,15 +20,15 @@ express()
     .set('view engine', 'ejs') //express gaat de viewengine ejs vanaf nu gebruiken
     .set('views', 'view')  //al mijn views staan in het mapje view
 
-    .get('/foryou', forYou)
-    .get('/404', notFound)
+    .get('/foryou', forYou) //Dit is de match page (home)
+    .get('/404', notFound) //Error pagina
 
-    .get('/edit-account', getEditProfilePage) //hier begin je
-    .get('/account', getAccount) //vanaf hier kun je updaten eventueel
-    .get('/profile-result', getProfileResult) //hier zie je je resultaat
+    .get('/create-profile', getCreateProfilePage) //hier maak je een nieuw account aan
+    .get('/update-profile', getUpdateProfilePage) //hier kun je meteen je profiel aanpassen als je wil
+    .get('/profile-result', getProfileResult) //hier zie je hoe het profiel er uit ziet
 
-    .post('/edit-account', addDataProfile)
-    .post('/account', updateDataProfile)
+    .post('/create-profile', addDataProfile)
+    .post('/update-profile', updateDataProfile)
     .post('/profile-result', deleteProfile)
 
     .listen(5000, function() {
@@ -72,22 +72,22 @@ function addDataProfile (req, res) {
     } else {
       // console.log(req.session.user)
       // console.log(req.session)
-      res.redirect('/account');
+      res.redirect('/update-profile');
     }
   }
 }
 
-async function getAccount (req, res) {
+async function getUpdateProfilePage (req, res) {
 
   let user = await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)});
   console.log(user.name)
   console.log(user)
-  res.render('account.ejs',{user})
+  res.render('update-profile.ejs',{user})
 }
 
 
-function getEditProfilePage (req, res) {
-  res.render('edit-account.ejs')
+function getCreateProfilePage (req, res) {
+  res.render('create-profile.ejs')
 }
 
 async function getProfileResult(req, res) {
@@ -108,7 +108,7 @@ function deleteProfile(req, res, next){
 		if (err) {
 			next(err);
 		} else {
-			res.redirect('/edit-account');
+			res.redirect('/create-profile');
 		}
 	}
 }

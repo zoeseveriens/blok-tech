@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<%- include('partials/register-header'); -%>
+
+<body>
+
+
+  <section class="create-account-page">
+    <h1 class="page-title">Let's set up your profile</h1>
+
+     <form method="POST" action="/create-profile">
+
+      <fieldset>
+        <label for="name">Name</label>
+        <input type="text" name="name">
+        <label for="age">Age</label>
+        <input type="number" name="age">
+        <label for="profession">Profession</label>
+        <input type="text" name="profession">
+      </fieldset>
+
+      <fieldset>
+        <h2>Tell something about yourself</h2>
+        <label for="about">Bio</label>
+        <textarea name="about" id="about" cols="30" rows="3"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <h2>What are some of your interests?</h2>
+        <label for="interest[]">1</label>
+        <input type="text" name="interest[]"> 
+        <label for="interest[]">2</label>
+        <input type="text" name="interest[]">
+        <label for="interest[]">3</label>
+        <input type="text" name="interest[]">
+      </fieldset>
+
+      <input class="add-button" type="submit" value="Next">
+
+     </form>
+  
+
+
+      </section>
+
+      <script src="script.js"></script>
+    
+</body>
+</html>
