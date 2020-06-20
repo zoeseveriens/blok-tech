@@ -1,7 +1,7 @@
 <%- include('partials/header'); -%>
 <body>
 
-  <section class="account-page">
+  <section>
 
     <h1 class="page-title">Welcome to your profile <%= user.name %></h1>
 
@@ -13,8 +13,10 @@
         <p><%= user.profession %></p>
     </div> 
 
-   <h2>Bio</h2>
-   <p><%= user.about %></p>
+    <div class="bio">
+      <h2>Bio</h2>
+      <p><%= user.about %></p>
+    </div>
 
     <h2>Interests</h2>
     <div class="account-interests">
@@ -25,11 +27,13 @@
        </ul>
      </div>
 
-     <form method="POST" value="/profile-result">
-      <button>Delete account</button>
+     <a href="/update-profile" class="update-btn">Update profile</a>
+
+     <form method="POST" value="/profile-result" class="delete">
+      <h2>DANGER ZONE</h2>
+      <button class="delete-btn">Delete profile</button>
      </form>
 
-     <a href="/update-profile">Update profile</a>
    
    </section>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('partials/register-header'); -%>
+<%- include('partials/header'); -%>
 
 <body>
    
@@ -15,7 +15,7 @@
      <form method="POST" action="/update-profile">
 
       <fieldset>
-        <label>Name</label>
+        <label>Full name</label>
         <input type="text" name="name" value="<%= user.name %>">
         <label>Age</label>
         <input type="number" name="age" value="<%= user.age %>">
@@ -39,7 +39,7 @@
         <input type="text" name="interest[]" value="<%= user.interest[2] %>">
       </fieldset>
 
-      <input class="add-button" type="submit" value="save">
+      <input class="add-btn" type="submit" value="save">
 
      </form>
 
