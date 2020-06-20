@@ -1,6 +1,6 @@
-<%- include('partials/account-header'); -%>
+<%- include('partials/header'); -%>
 <body>
-  
+
   <section class="account-page">
 
     <h1 class="page-title">Welcome to your profile <%= user.name %></h1>
@@ -28,6 +28,8 @@
      <form method="POST" value="/profile-result">
       <button>Delete account</button>
      </form>
+
+     <a href="/update-profile">Update profile</a>
    
    </section>
 
