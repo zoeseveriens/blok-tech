@@ -51,11 +51,10 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
   
 
 
-https://zellwk.com/blog/crud-express-mongodb/
+//https://zellwk.com/blog/crud-express-mongodb/
 
 //voegt profiel info toe aan de database
-
-function addDataProfile (req, res) {
+function addDataProfile (req, res, next) {
   req.session.user = {
     name: req.body.name,
     age: req.body.age,
@@ -76,9 +75,11 @@ function addDataProfile (req, res) {
   }
 }
 
+//https://github.com/cmda-bt/be-course-19-20/blob/master/examples/mongodb-server/index.js
+// Hulp gekregen van een klasgenoot
 async function getUpdateProfilePage (req, res) {
-
-  let user = await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)});
+  var id = req.session.user._id
+  const user = await db.collection('users').findOne({_id: mongo.ObjectID(id)}); //zonder await blijft de id steeds op pending staan
   console.log(user.name)
   console.log(user)
   res.render('update-profile.ejs',{user})
@@ -89,11 +90,12 @@ function getCreateProfilePage (req, res) {
   res.render('create-profile.ejs')
 }
 
-async function getProfileResult(req, res) {
+// Hulp gekregen van een klasgenoot
+ async function getProfileResult(req, res) {
   if (req.session.user){
-    res.render('profile-result', {user: await db.collection('users').findOne({'_id': mongo.ObjectID(req.session.user._id)})});
+    res.render('profile-result', {user: await db.collection('users').findOne({_id: mongo.ObjectID(req.session.user._id)})});
   } else {
-    res.redirect('/404')
+    res.redirect('/404') //als je geen profiel hebt krijg je een error page
   }
 }
 
@@ -101,6 +103,8 @@ async function getProfileResult(req, res) {
 // 	res.status(200).send('This will be the delete page');
 // }
 
+// https://docs.google.com/presentation/d/1J0SVcx7rMnFp37JqsQMHQq92EfBRUFdgSAj5i9wQKjg/edit#slide=id.g33c7310eb9_0_676
+// https://docs.google.com/presentation/d/1J0SVcx7rMnFp37JqsQMHQq92EfBRUFdgSAj5i9wQKjg/edit#slide=id.g33c7310eb9_0_401
 function deleteProfile(req, res, next){
   db.collection('users').deleteOne({
 		_id: mongo.ObjectID(req.session.user._id)
@@ -110,11 +114,14 @@ function deleteProfile(req, res, next){
 		if (err) {
 			next(err);
 		} else {
+      console.log('session is destroyed');
+      req.session.destroy();
 			res.redirect('/create-profile');
 		}
 	}
 }
 
+// https://docs.google.com/presentation/d/1J0SVcx7rMnFp37JqsQMHQq92EfBRUFdgSAj5i9wQKjg/edit#slide=id.g33c7310eb9_0_389
 function updateDataProfile(req, res, next) {
 	db.collection('users').updateOne({
 		_id: mongo.ObjectID(req.session.user._id)},
@@ -143,7 +150,7 @@ function updateDataProfile(req, res, next) {
       } else{
         res.redirect('/404')
       }  
-    };
+    }
 
     function notFound(req, res){
         res.status(404).render('not-found.ejs')
