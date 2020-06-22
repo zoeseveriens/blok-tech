@@ -1,7 +1,7 @@
 # Match Me
 
-## Static site
-https://zoeseveriens.github.io/dating-app/static/index.html
+## Live version
+https://match-me-dating.herokuapp.com/create-profile
 
 ## Job Story
 Wanneer ik nieuwe interesses heb, wil ik deze kunnen toevoegen aan mijn profiel, zodat mijn profiel altijd up to date is.
