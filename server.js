@@ -5,7 +5,7 @@ const ejs = require('ejs');
 const ejslint = require('ejs-lint');
 const bodyParser = require('body-parser');
 const session = require('express-session')
-const port = process.env.PORT || 5000;
+const port = 4000;
 
 //Express server setup
 express()
@@ -29,16 +29,14 @@ express()
     .post('/create-profile', addDataProfile)
     .post('/update-profile', updateDataProfile)
     .post('/profile-result', deleteProfile)
-
-    .listen(port, function() {
-      console.log(`listening on ${port}`) 
-    })
+    .listen(process.env.PORT || 4000, () => console.log(`app draait op port ${port}!!`));
 
 //Connecting with database
 require('dotenv').config();
 
 const url = 'mongodb+srv://' + process.env.DB_NAME + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
 let db;
+
 
 mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
     if (err) {
