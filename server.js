@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongo = require('mongodb');
 const ejs = require('ejs');
@@ -5,7 +6,7 @@ const ejslint = require('ejs-lint');
 const eslint = require('eslint');
 const bodyParser = require('body-parser');
 const session = require('express-session')
-require('dotenv').config();
+// const port = 5000;
 
 //Express server setup
 express()
