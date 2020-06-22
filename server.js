@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const mongo = require('mongodb');
 const ejs = require('ejs');
 const ejslint = require('ejs-lint');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-require('dotenv').config();
+const port = process.env.PORT || 5000;
 
 //Express server setup
 express()
@@ -29,8 +30,8 @@ express()
     .post('/update-profile', updateDataProfile)
     .post('/profile-result', deleteProfile)
 
-    .listen(5000, function() {
-      console.log('listening on 5000') 
+    .listen(port, function() {
+      console.log('listening on ${port}') 
     })
 
 //Connecting with database
