@@ -21,7 +21,6 @@ express()
 
     .get('/foryou', forYou) //Dit is de match page (home)
     .get('/404', notFound) //Error pagina
-
     .get('/create-profile', getCreateProfilePage) //hier maak je een nieuw account aan
     .get('/update-profile', getUpdateProfilePage) //hier kun je meteen je profiel aanpassen als je wil
     .get('/profile-result', getProfileResult) //hier zie je hoe het profiel er uit ziet
@@ -50,6 +49,10 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
   });
   
 
+  //rendert de begin pagina
+  function getCreateProfilePage (req, res) {
+    res.render('create-profile.ejs')
+  }
 
 //https://zellwk.com/blog/crud-express-mongodb/
 
@@ -79,16 +82,12 @@ function addDataProfile (req, res, next) {
 // Hulp gekregen van een klasgenoot
 async function getUpdateProfilePage (req, res) {
   var id = req.session.user._id
-  const user = await db.collection('users').findOne({_id: mongo.ObjectID(id)}); //zonder await blijft de id steeds op pending staan
+  let user = await db.collection('users').findOne({_id: mongo.ObjectID(id)}); //zonder await blijft de id steeds op pending staan
   console.log(user.name)
   console.log(user)
   res.render('update-profile.ejs',{user})
 }
 
-
-function getCreateProfilePage (req, res) {
-  res.render('create-profile.ejs')
-}
 
 // Hulp gekregen van een klasgenoot
  async function getProfileResult(req, res) {
