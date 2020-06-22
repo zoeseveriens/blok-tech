@@ -5,7 +5,7 @@ const ejs = require('ejs');
 const ejslint = require('ejs-lint');
 const bodyParser = require('body-parser');
 const session = require('express-session')
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 //Express server setup
 express()
@@ -31,7 +31,7 @@ express()
     .post('/profile-result', deleteProfile)
 
     .listen(port, function() {
-      console.log('listening on ${port}') 
+      console.log(`listening on ${port}`) 
     })
 
 //Connecting with database
