@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/header'); -%>
+
+<body>
+   
+
+
+  <section class="create-account-page">
+    <h1 class="page-title">Update your profile here (or don't)</h1>
+
+
+     <div class="account-img-container"></div>
+
+     <form method="POST" action="/update-profile">
+
+      <fieldset>
+        <label>Full name</label>
+        <input type="text" name="name" value="<%= user.name %>">
+        <label>Age</label>
+        <input type="number" name="age" value="<%= user.age %>">
+        <label>Profession</label>
+        <input type="text" name="profession" value="<%= user.profession %>">
+      </fieldset>
+
+      <fieldset>
+        <h2>Tell something about yourself</h2>
+        <label>Bio</label>
+        <textarea name="about" id="about" cols="30" rows="3"><%= user.about %></textarea>
+      </fieldset>
+
+      <fieldset>
+        <h2>What are some of your interests?</h2>
+        <label>I like...</label>
+        <input type="text" name="interest[]" value="<%= user.interest[0] %>"> 
+        <input type="text" name="interest[]" value="<%= user.interest[1] %>"> 
+        <input type="text" name="interest[]" value="<%= user.interest[2] %>">
+      </fieldset>
+
+      <input class="add-btn" type="submit" value="save">
+
+     </form>
+
+  </section>
+
+  <script src="script.js"></script>
+    
+</body>
+</html>

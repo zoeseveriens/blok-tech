@@ -2,9 +2,8 @@ const express = require('express');
 const mongo = require('mongodb');
 const ejs = require('ejs');
 const ejslint = require('ejs-lint');
-const eslint = require('eslint');
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const session = require('express-session');
 require('dotenv').config();
 
 //Express server setup
@@ -20,12 +19,15 @@ express()
     .set('view engine', 'ejs') //express gaat de viewengine ejs vanaf nu gebruiken
     .set('views', 'view')  //al mijn views staan in het mapje view
 
-    .get('/foryou', forYou)
-    .get('/account', account) //lijst met interests
-    .get ('/edit-account', getEditProfilePage)
-    .get('/404', notFound)
+    .get('/foryou', forYou) //Dit is de match page (home)
+    .get('/404', notFound) //Error pagina
+    .get('/create-profile', getCreateProfilePage) //hier maak je een nieuw account aan
+    .get('/update-profile', getUpdateProfilePage) //hier kun je meteen je profiel aanpassen als je wil
+    .get('/profile-result', getProfileResult) //hier zie je hoe het profiel er uit ziet
 
-    .post('/account', updateProfile)
+    .post('/create-profile', addDataProfile)
+    .post('/update-profile', updateDataProfile)
+    .post('/profile-result', deleteProfile)
 
     .listen(5000, function() {
       console.log('listening on 5000') 
@@ -47,56 +49,107 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true
   });
   
 
-
-https://zellwk.com/blog/crud-express-mongodb/
-
-//Dit is je account pagina
-function account (req, res, next) {
-  
-  db.collection('users').find().toArray(done)
-
-  function done(err, data) {
-    if (err) {
-      next (err)
-    } else {
-      res.render('account.ejs', {data: data})
-
-    }
+  //rendert de begin pagina
+  function getCreateProfilePage (req, res) {
+    res.render('create-profile.ejs')
   }
-}
 
+//https://zellwk.com/blog/crud-express-mongodb/
 
 //voegt profiel info toe aan de database
-
-function updateProfile (req, res, next) {
-
-  db.collection('users').insertOne({
+function addDataProfile (req, res, next) {
+  req.session.user = {
     name: req.body.name,
     age: req.body.age,
     profession: req.body.profession,
     about: req.body.about,
     interest : req.body.interest
-  }, done)
+  };
 
-  function done(err, data) {
-    if (err) {
-      next(err)
+  db.collection('users').insertOne(req.session.user, done);
+  function done(err, data){
+    if(err){
+      next(err);
     } else {
-      console.log(req.body)
-      res.redirect('/account')
+      // console.log(req.session.user)
+      // console.log(req.session)
+      res.redirect('/update-profile');
     }
   }
 }
 
-//Dit is de edit account pagina
-function getEditProfilePage (req, res) {
-  res.render('edit-account.ejs')
+//https://github.com/cmda-bt/be-course-19-20/blob/master/examples/mongodb-server/index.js
+// Hulp gekregen van een klasgenoot
+async function getUpdateProfilePage (req, res) {
+  var id = req.session.user._id
+  let user = await db.collection('users').findOne({_id: mongo.ObjectID(id)}); //zonder await blijft de id steeds op pending staan
+  console.log(user.name)
+  console.log(user)
+  res.render('update-profile.ejs',{user})
 }
 
 
+// Hulp gekregen van een klasgenoot
+ async function getProfileResult(req, res) {
+  if (req.session.user){
+    res.render('profile-result', {user: await db.collection('users').findOne({_id: mongo.ObjectID(req.session.user._id)})});
+  } else {
+    res.redirect('/404') //als je geen profiel hebt krijg je een error page
+  }
+}
+
+// function deleteProfile(req, res) {
+// 	res.status(200).send('This will be the delete page');
+// }
+
+// https://docs.google.com/presentation/d/1J0SVcx7rMnFp37JqsQMHQq92EfBRUFdgSAj5i9wQKjg/edit#slide=id.g33c7310eb9_0_676
+// https://docs.google.com/presentation/d/1J0SVcx7rMnFp37JqsQMHQq92EfBRUFdgSAj5i9wQKjg/edit#slide=id.g33c7310eb9_0_401
+function deleteProfile(req, res, next){
+  db.collection('users').deleteOne({
+		_id: mongo.ObjectID(req.session.user._id)
+	}, done);
+
+	function done(err, data) {
+		if (err) {
+			next(err);
+		} else {
+      console.log('session is destroyed');
+      req.session.destroy();
+			res.redirect('/create-profile');
+		}
+	}
+}
+
+// https://docs.google.com/presentation/d/1J0SVcx7rMnFp37JqsQMHQq92EfBRUFdgSAj5i9wQKjg/edit#slide=id.g33c7310eb9_0_389
+function updateDataProfile(req, res, next) {
+	db.collection('users').updateOne({
+		_id: mongo.ObjectID(req.session.user._id)},
+	{$set: 
+			{ name: req.body.name,
+        age: req.body.age,
+        profession: req.body.profession,
+        about: req.body.about,
+        interest : req.body.interest}
+	}
+	, done);
+
+	function done(err, data) {
+		if (err) {
+			next(err);
+		} else {
+      console.log(req.session.user)
+			res.redirect('/profile-result');
+		}
+	}
+}
+
     function forYou (req, res){
+      if(req.session.user){
         res.render('foryou.ejs')
-    };
+      } else{
+        res.redirect('/404')
+      }  
+    }
 
     function notFound(req, res){
         res.status(404).render('not-found.ejs')

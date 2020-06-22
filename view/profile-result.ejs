@@ -1,0 +1,44 @@
+<%- include('partials/header'); -%>
+<body>
+
+  <section>
+
+    <h1 class="page-title">Welcome to your profile <%= user.name %></h1>
+
+    <div class="account-img-container"></div>
+
+    <div class="account-profile-info"> 
+       <h1><%= user.name %> , <%= user.age %></h1>
+        <h1>Amsterdam</h1>
+        <p><%= user.profession %></p>
+    </div> 
+
+    <div class="bio">
+      <h2>Bio</h2>
+      <p><%= user.about %></p>
+    </div>
+
+    <h2>Interests</h2>
+    <div class="account-interests">
+      <ul>
+            <li><%= user.interest[0] %></li>
+            <li><%= user.interest[1] %></li>
+            <li><%= user.interest[2] %></li>
+       </ul>
+     </div>
+
+     <a href="/update-profile" class="update-btn">Update profile</a>
+     <a href="/create-profile" class="update-btn">Logout</a>
+
+     <form method="POST" value="/profile-result" class="delete">
+      <h2>DANGER ZONE</h2>
+      <button class="delete-btn">Delete profile</button>
+     </form>
+
+   
+   </section>
+
+  <script src="script.js"></script>
+  
+</body>
+</html>
