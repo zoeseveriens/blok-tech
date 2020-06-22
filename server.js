@@ -5,7 +5,7 @@ const ejs = require('ejs');
 const ejslint = require('ejs-lint');
 const bodyParser = require('body-parser');
 const session = require('express-session')
-const port = 4000;
+const port = process.env.PORT || 5000;
 
 //Express server setup
 express()
@@ -29,7 +29,7 @@ express()
     .post('/create-profile', addDataProfile)
     .post('/update-profile', updateDataProfile)
     .post('/profile-result', deleteProfile)
-    .listen(process.env.PORT || 4000, () => console.log(`app draait op port ${port}!!`));
+    .listen(port, console.log(`app draait op port ${port}!!`));
 
 //Connecting with database
 require('dotenv').config();
